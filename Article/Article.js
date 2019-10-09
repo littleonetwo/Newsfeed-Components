@@ -37,9 +37,9 @@ const data = [
         mewing kittens Remus Lupin. Palominos scarlet train black robes, Metamorphimagus Niffler dead easy second bedroom. Padma
         and Parvati Sorting Hat Minister of Magic blue turban remember my last.`,
 
-    thirdParagraph: `Toad-like smile Flourish and Blotts he knew I’d come back Quidditch World Cup. Fat Lady baubles banana fritters fairy lights 
-        Petrificus Totalus. So thirsty, deluminator firs’ years follow me 12 inches of parchment. Head Boy start-of-term banquet Cleansweep Seven 
-        roaring lion hat. Unicorn blood crossbow mars is bright tonight, feast Norwegian Ridgeback. Come seek us where our voices sound, we cannot 
+    thirdParagraph: `Toad-like smile Flourish and Blotts he knew I’d come back Quidditch World Cup. Fat Lady baubles banana fritters fairy lights
+        Petrificus Totalus. So thirsty, deluminator firs’ years follow me 12 inches of parchment. Head Boy start-of-term banquet Cleansweep Seven
+        roaring lion hat. Unicorn blood crossbow mars is bright tonight, feast Norwegian Ridgeback. Come seek us where our voices sound, we cannot
         sing above the ground, Ginny Weasley bright red. Fanged frisbees, phoenix tears good clean match.`
   },
   {
@@ -66,8 +66,8 @@ const data = [
         consectetur adipiscing elit. Nidoran Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nidorino Lorem ipsum dolor
         sit amet, consectetur adipiscing elit. Nidoking Lorem ipsum`,
 
-    thirdParagraph: `Gotta catch 'em all Horsea gym Ninjask Absol Sinnoh Poliwag. Gotta catch 'em all Youngster wants to fight Soda Pop Floatzel 
-        Leech Life Seismitoad Ariados. Earthquake Pokemon Glitch City Tail Whip Skitty Ekans Dialga. Ut aliquip ex ea commodo consequat James 
+    thirdParagraph: `Gotta catch 'em all Horsea gym Ninjask Absol Sinnoh Poliwag. Gotta catch 'em all Youngster wants to fight Soda Pop Floatzel
+        Leech Life Seismitoad Ariados. Earthquake Pokemon Glitch City Tail Whip Skitty Ekans Dialga. Ut aliquip ex ea commodo consequat James
         Castform Lotad the power that's inside Burnt Berry Makuhita. Ghost Ariados Corphish Dusclops Golbat Gligar Zweilous.`
   },
   {
@@ -85,11 +85,23 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Just Because I Was Told to Do This',
+    date: 'Jan 3st, 2019',
+    firstParagraph: `Trombone was his nameTrombone was his nameTrombone was his nameTrombone was his nameTrombone was his nameTrombone was his nameTrombone was his name
+    Trombone was his nameTrombone was his nameTrombone was his nameTrombone was his nameTrombone was his nameTrombone was his nameTrombone was his nameTrombone was his name`,
+
+    secondParagraph: `She sold sea shells from the sea shed by the sea shore She sold sea shells from the sea shed by the sea shore She sold sea shells from the sea shed by the sea shore
+    She sold sea shells from the sea shed by the sea shore She sold sea shells from the sea shed by the sea shore She sold sea shells from the sea shed by the sea shore`,
+
+    thirdParagraph: `Ehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh`
   }
+
 ];
 
-/* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
-  
+/* Step 1: Create a function that creates a component. You will want your component to look like the template below:
+
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -112,3 +124,69 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function createArticle(info){
+
+
+  let newArticle1 = document.createElement('div');
+  let newArticle2 = document.createElement('h2');
+  let newArticle3 = document.createElement('p');
+  let newArticle4 = document.createElement('span');
+  let content1 = document.createElement('p');
+  let content2 = document.createElement('p');
+  let content3 = document.createElement('p');
+
+  newArticle1.classList.add('article');
+
+  newArticle2.textContent = info.title;
+
+  newArticle3.classList.add('date');
+  newArticle3.textContent = info.date;
+
+  newArticle4.classList.add('expandButton');
+  newArticle4.textContent = 'More';
+
+
+  newArticle4.addEventListener('click', (e) =>{
+    newArticle1.classList.toggle('article-open');
+    newArticle4.textContent ='Less'
+
+  });
+
+
+  content1.textContent = info.firstParagraph;
+  content2.textContent = info.secondParagraph;
+  content3.textContent = info.thirdParagraph;
+
+  let final = newArticle1;
+
+  final.appendChild(newArticle2);
+  final.appendChild(newArticle3);
+  final.appendChild(content1);
+  final.appendChild(content2);
+  final.appendChild(content3);
+  final.appendChild(newArticle4);
+
+  //console.log(final);
+
+  return final;
+
+}
+
+let newItems = data.map((arrayItem)=> {
+  let newPost = createArticle(arrayItem);
+
+  return newPost;
+
+});
+//console.log(newItems);
+let parent = document.querySelector('.articles');
+
+//console.log(createArticle(data[0]));
+
+// parent.appendChild(createArticle(data[0]));
+newItems.forEach(component =>{
+
+  parent.appendChild(component);
+
+});
